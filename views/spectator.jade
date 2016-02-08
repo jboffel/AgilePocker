@@ -35,12 +35,6 @@ block content
             h1= title
             p The next sprint pocker generation system!
             br
-            input(type='text', placeholder='Email', size='40', id='scrumMasterMail')
-            input(type='button', value='Connect', onclick='connectScrumMaster()')
-            input(type='button', value='Disconnect', onclick='disconnectScrumMaster()')
-            br
-            input(type='button', value='Start new estimation', onclick='startEstimation()')
-            input(type='button', value='Reveal score', onclick='showScores()', id='revealScore', disabled=true)
             #poker(style='display: block;')
               menu(id='controls', style='bottom: 45%; left: -2.5%; position: absolute; width: 100%;')
               canvas(id='canvas', width=1024, height=768, style='height: 80vh; width: 80vw; background:url(images/pokerTable.jpg); background-size: 100% 100%;').img-responsive
@@ -54,3 +48,7 @@ block content
   script(type='text/javascript', src='javascripts/wow.min.js')
   script(type='text/javascript', src='javascripts/main.js')
   script(type='text/javascript', src='javascripts/cardGame.js')
+  script(type='text/javascript').
+    $().ready(function () {
+      connectSpectator()
+    });

@@ -153,6 +153,7 @@ function sendEstimation() {
 }
 
 function connectScrumMaster() {
+    $('canvas').removeLayers().drawLayers();
     socket.connect();
     socket.emit('scrumMaster', {emailMd5: $.md5($('#scrumMasterMail').val())});
 }
@@ -160,6 +161,11 @@ function connectScrumMaster() {
 function disconnectScrumMaster() {
     socket.disconnect();
     $('canvas').removeLayers().drawLayers();
+}
+
+function connectSpectator() {
+    $('canvas').removeLayers().drawLayers();
+    socket.emit('spectator');
 }
 
 var playerPool;

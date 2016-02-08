@@ -29,7 +29,7 @@ module.exports = function() {
   ];
 
   var users = [];
-  var scrumMaster = {playerId: 'player0', position: {x: 512, y: 70}, scorePosition: {x: 512, y:384}, socketId: undefined};
+  var scrumMaster = {playerId: 'player0', position: {x: 512, y: 70}, scorePosition: {x: 512, y:384}, socketId: undefined, emailMd5: ''};
 
   var bingo = {
     selectedNumbers: [],
@@ -107,6 +107,13 @@ module.exports = function() {
   io.on('connection', function(socket){
     console.log('a user connected');
 
+    socket.on('spectator', function() {
+      console.log('New spectator connected!');
+      if (scrumMaster.socketId != undefined)
+        socket.emit('newUser', {playerPosition: scrumMaster, userDetails: {userId: 'scrumMaster', emailMd5: scrumMaster.emailMd5, position: 0, socketId: socket.id}});
+      socket.emit('drawUsers', {playerPool: playerPool, currentUsers: bingo.selectedNumbers, usersDetails: users, myPosition: 0});
+    });
+
     socket.on('scrumMaster', function(param) {
       console.log('scrumMaster is connected');
       if (scrumMaster.socketId != undefined) {
@@ -177,7 +184,7 @@ module.exports = function() {
       socket.broadcast.emit('newUser', {playerPosition: playerPool[playerPosition-1], userDetails: res});
       socket.emit('drawUsers', {playerPool: playerPool, currentUsers: bingo.selectedNumbers, usersDetails: users, myPosition: myPosition});
       if (scrumMaster.socketId != undefined)
-        socket.emit('newUser', {playerPosition: scrumMaster, userDetails: {userId: 'scrumMaster', emailMd5: param.emailMd5, position: 0, socketId: socket.id}});
+        socket.emit('newUser', {playerPosition: scrumMaster, userDetails: {userId: 'scrumMaster', emailMd5: scrumMaster.emailMd5, position: 0, socketId: socket.id}});
       //console.log(users);
       //console.log(bingo.selectedNumbers);
     });
