@@ -121,6 +121,7 @@ module.exports = function() {
         return;
       }
       scrumMaster.socketId = socket.id;
+      scrumMaster.emailMd5 = param.emailMd5;
       console.log(scrumMaster);
       //socket.broadcast.emit('newUser', {playerPosition: scrumMaster, userDetails: {userId: 'scrumMaster', emailMd5: param.emailMd5, position: 0, socketId: socket.id}});
       io.emit('newUser', {playerPosition: scrumMaster, userDetails: {userId: 'scrumMaster', emailMd5: param.emailMd5, position: 0, socketId: socket.id}});

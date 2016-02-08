@@ -100,8 +100,8 @@ function identify() {
     } else {
         $('#identification-error').hide();
 
-        localStorage.user = $('#user-id').val();
-        localStorage.userMail = $('#user-mail').val();
+        localStorage.pokerUser = $('#user-id').val();
+        localStorage.pokerUserMail = $('#user-mail').val();
         //socket.emit('scrumMaster');
         socket.connect();
         socket.emit('loginCheck', {userId: $('#user-id').val(), emailMd5: $.md5($('#user-mail').val())});
@@ -128,8 +128,8 @@ function appDisconnect() {
 
     $('#identification-error').hide();
 
-    localStorage.user = $('#user-id').val();
-    localStorage.userMail = $('#user-mail').val();
+    localStorage.pokerUser = $('#user-id').val();
+    localStorage.pokerUserMail = $('#user-mail').val();
 
     $('#poker').hide();
     $('#identification').show();
@@ -263,10 +263,10 @@ socket.on('removeUser', function (param) {
     //$('canvas').removeLayer('player' + param.position).drawLayers();
 });
 
-if (localStorage.user) {
-    $('#user-id').val(localStorage.user);
+if (localStorage.pokerUser) {
+    $('#user-id').val(localStorage.pokerUser);
 }
 
-if (localStorage.userMail) {
-    $('#user-mail').val(localStorage.userMail);
+if (localStorage.pokerUserMail) {
+    $('#user-mail').val(localStorage.pokerUserMail);
 }
