@@ -1,0 +1,56 @@
+extends layout
+
+block content
+  header#header
+    .navbar.navbar-inverse(role='banner')
+      .container
+        .navbar-header
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href='/')
+            h1
+              | Scrum Poker App
+        .collapse.navbar-collapse
+          ul.nav.navbar-nav.navbar-right
+            li.active
+              a(href='/') Home
+            li.dropdown
+              a(href='#')
+                | Pages
+                i.fa.fa-angle-down
+              ul.sub-menu(role='menu')
+                li
+                  a(href='/ScrumMaster') Scrum Master
+                //li
+                //  a(href='/stats') Stats
+  // /#header
+  section#clients
+    .container
+      .row
+        .col-sm-12
+          .clients.text-center.wow.fadeInUp(data-wow-duration='500ms', data-wow-delay='300ms')
+            h1= title
+            p The next sprint pocker generation system!
+            br
+            input(type='text', placeholder='Email', size='40', id='scrumMasterMail')
+            input(type='button', value='Connect', onclick='connectScrumMaster()')
+            input(type='button', value='Disconnect', onclick='disconnectScrumMaster()')
+            br
+            input(type='button', value='Start new estimation', onclick='startEstimation()')
+            input(type='button', value='Reveal score', onclick='showScores()', id='revealScore', disabled=true)
+            #poker(style='display: block;')
+              menu(id='controls', style='bottom: 45%; left: -2.5%; position: absolute; width: 100%;')
+              canvas(id='canvas', width=1024, height=768, style='height: 80vh; width: 80vw; background:url(images/pokerTable.jpg); background-size: 100% 100%;').img-responsive
+            p
+              | Made by: Jeannie BOFFEL
+  script(type='text/javascript', src='javascripts/jquery-2.2.0.min.js')
+  script(type='text/javascript', src='javascripts/jcanvas.min.js')
+  script(type='text/javascript', src='javascripts/jquery.md5.js')
+  script(type='text/javascript', src='javascripts/bootstrap.min.js')
+  script(type='text/javascript', src='javascripts/lightbox.min.js')
+  script(type='text/javascript', src='javascripts/wow.min.js')
+  script(type='text/javascript', src='javascripts/main.js')
+  script(type='text/javascript', src='javascripts/cardGame.js')
