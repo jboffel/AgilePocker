@@ -33,12 +33,11 @@ block content
         .col-sm-12
           .clients.text-center.wow.fadeInUp(data-wow-duration='500ms', data-wow-delay='300ms')
             h1= title
-            p The next sprint pocker generation system!
-            br
+            p The next sprint poker generation system!
             input(type='text', placeholder='Email', size='40', id='scrumMasterMail')
             input(type='button', value='Connect', onclick='connectScrumMaster()')
             input(type='button', value='Disconnect', onclick='disconnectScrumMaster()')
-            br
+            | &nbsp;&nbsp;&nbsp;&nbsp;
             input(type='button', value='Start new estimation', onclick='startEstimation()')
             input(type='button', value='Reveal score', onclick='showScores()', id='revealScore', disabled=true)
             #poker(style='display: block;')
