@@ -130,12 +130,15 @@ module.exports = function() {
 
     socket.on('estimation', function (param) {
       estimation.addUserScore(param);
+
+      var res = users.find(function (a) {return socket.id == a.socketId});
+      io.emit('gotEstimation', {position: res.position});
+
       if (estimation.isAllScoreReady(bingo.selectedNumbers)) {
         if(scrumMaster.socketId != undefined)
-          socket.broadcast.emit('allEstimations');
+          io.emit('allEstimations');
         console.log('Ready to show scores!');
       }
-      socket.emit('gotEstimation');
       console.log(estimation.scores);
       console.log(bingo.selectedNumbers);
     });
@@ -198,7 +201,7 @@ module.exports = function() {
         scrumMaster.socketId = undefined;
         socket.broadcast.emit('removeUser', {position: 0});
         if (estimation.isAllScoreReady(bingo.selectedNumbers)) {
-          socket.broadcast.emit('allEstimations');
+          io.emit('allEstimations');
         } else {
           socket.broadcast.emit('disableShowScores');
         }
@@ -229,7 +232,7 @@ module.exports = function() {
 
       if (estimation.isAllScoreReady(bingo.selectedNumbers)) {
         if (scrumMaster.socketId != undefined)
-          socket.broadcast.emit('allEstimations');
+          io.emit('allEstimations');
       } else {
         if (scrumMaster.socketId != undefined)
           socket.broadcast.emit('disableShowScores');

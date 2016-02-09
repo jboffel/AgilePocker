@@ -173,21 +173,73 @@ var myPosition;
 
 socket.on('newEstimation', function () {
     $('canvas').removeLayerGroup('scores').drawLayers();
+    $('canvas').removeLayer('scoreReady').drawLayers();
 });
 
-socket.on('gotEstimation', function () {
-    alert('Estimation recorded!');
+socket.on('gotEstimation', function (param) {
+    //alert('Estimation recorded!');
+
+    $('canvas').removeLayer('score' + param.position).drawLayers();
+
+    $('canvas').drawText({
+        layer: true,
+        name: 'score' + param.position,
+        groups: ['scores', 'player' + param.position],
+        fillStyle: '#f00',
+        strokeStyle: '#f00',
+        strokeWidth: 1,
+        x: 512, y: 838,
+        fontSize: 0,
+        fontFamily: 'Verdana, sans-serif',
+        text: 'Check!'
+    });
+
+    $('canvas')
+        .animateLayer('score' + param.position, {
+                y: 384,
+                fontSize: 24,
+            }, 1000, function (layer) {
+                $(this).animateLayer(layer, {
+                    x: playerPool[parseInt(layer.name.substr('score'.length))-1].scorePosition.x,
+                    y: playerPool[parseInt(layer.name.substr('score'.length))-1].scorePosition.y,
+                    rotate: 360
+                }, 'slow', 'swing');
+            }
+        );
 });
 
 socket.on('disableShowScores', function () {
+
+    $('canvas').removeLayer('scoreReady').drawLayers();
+
     if ($('#revealScore') != undefined) {
         $('#revealScore').prop('disabled', true);
     }
 });
 
 socket.on('allEstimations', function () {
+
+    $('canvas').removeLayer('scoreReady').drawLayers();
+
+    $('canvas').drawText({
+        layer: true,
+        name: 'scoreReady',
+        fillStyle: '#000',
+        strokeStyle: '#000',
+        strokeWidth: 1,
+        x: 512, y: 384,
+        fontSize: 0,
+        fontFamily: 'Verdana, sans-serif',
+        text: 'OK let\'s share!'
+    });
+
+    $('canvas')
+        .animateLayer('scoreReady', {
+            fontSize: 80
+        }, 2000);
+
     if ($('#revealScore') != undefined) {
-        alert('Ready to show scores!');
+        //alert('Ready to show scores!');
         $('#revealScore').prop('disabled', false);
     }
 });
@@ -204,38 +256,20 @@ socket.on('displayScores', function (scores) {
             layer: true,
             name: 'score' + scores[i].position,
             groups: ['scores', 'player' + scores[i].position],
-            fillStyle: '#aaa',
-            strokeStyle: '#aaa',
+            fillStyle: '#f00',
+            strokeStyle: '#f00',
             strokeWidth: 1,
             x: 512, y: 838,
-            fontSize: 24,
+            fontSize: 0,
             fontFamily: 'Verdana, sans-serif',
-            width: 0,
-            height: 0,
             text: scores[i].score
         });
 
         $('canvas')
             .animateLayer('score' + scores[i].position, {
                 y: 384,
-                width: 100, height: 120
+                fontSize: 24
             }, 1000, function (layer) {
-                //var newX;
-                //var newY;
-                //if (playerPool[scores[i].position].scorePosition.x > 512) {
-                //    newX = playerPool[scores[i].position].scorePosition.x - 512;
-                //    newX = '+=' + newX;
-                //} else {
-                //    newX = -1 * (playerPool[scores[i].position].scorePosition.x - 512);
-                //    newX = '-=' + newX;
-                //}
-                //if (playerPool[scores[i].position].scorePosition.y > 384) {
-                //    newY = playerPool[scores[i].position].scorePosition.y - 384;
-                //    newY = '+=' + newY;
-                //} else {
-                //    newY = -1 * (playerPool[scores[i].position].scorePosition.y - 384);
-                //    newY = '-=' + newY;
-                //}
                 $(this).animateLayer(layer, {
                     x: playerPool[parseInt(layer.name.substr('score'.length))-1].scorePosition.x,
                     y: playerPool[parseInt(layer.name.substr('score'.length))-1].scorePosition.y,
