@@ -8,6 +8,13 @@ var daemon = require("daemonize2").setup({
     pidfile: "/var/run/agilepoker.pid"
 });
 
+if (process.env.PORT != undefined && process.env.PORT < 1024) {
+    if (process.getuid() != 0) {
+        console.log("Expected to run as root");
+        process.exit(1);
+    }
+}
+
 switch (process.argv[2]) {
 
     case "start":
