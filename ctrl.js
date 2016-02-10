@@ -3,7 +3,7 @@
  */
 
 var daemon = require("daemonize2").setup({
-    main: "../bin/www",
+    main: "bin/www",
     name: "agilepoker",
     pidfile: "/var/run/agilepoker.pid"
 });
