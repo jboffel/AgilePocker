@@ -236,7 +236,7 @@ function displayInformation (textInfo) {
         fillStyle: '#000',
         strokeStyle: '#000',
         strokeWidth: 1,
-        x: 512, y: 384,
+        x: 512, y: 70,
         fontSize: 0,
         fontFamily: 'Verdana, sans-serif',
         text: textInfo
@@ -244,8 +244,9 @@ function displayInformation (textInfo) {
 
     $('canvas')
         .animateLayer('information', {
+            x: 512, y: 384,
             fontSize: 80
-        }, 2000);
+        }, 1500);
 }
 
 socket.on('displayScores', function (scores) {
