@@ -173,7 +173,7 @@ var myPosition;
 
 socket.on('newEstimation', function () {
     $('canvas').removeLayerGroup('scores').drawLayers();
-    $('canvas').removeLayer('scoreReady').drawLayers();
+    displayInformation('Let\'s estimate!')
 });
 
 socket.on('gotEstimation', function (param) {
@@ -210,7 +210,7 @@ socket.on('gotEstimation', function (param) {
 
 socket.on('disableShowScores', function () {
 
-    $('canvas').removeLayer('scoreReady').drawLayers();
+    $('canvas').removeLayer('information').drawLayers();
 
     if ($('#revealScore') != undefined) {
         $('#revealScore').prop('disabled', true);
@@ -219,30 +219,34 @@ socket.on('disableShowScores', function () {
 
 socket.on('allEstimations', function () {
 
-    $('canvas').removeLayer('scoreReady').drawLayers();
-
-    $('canvas').drawText({
-        layer: true,
-        name: 'scoreReady',
-        fillStyle: '#000',
-        strokeStyle: '#000',
-        strokeWidth: 1,
-        x: 512, y: 384,
-        fontSize: 0,
-        fontFamily: 'Verdana, sans-serif',
-        text: 'OK let\'s share!'
-    });
-
-    $('canvas')
-        .animateLayer('scoreReady', {
-            fontSize: 80
-        }, 2000);
+    displayInformation('OK! Let\'s share!');
 
     if ($('#revealScore') != undefined) {
         //alert('Ready to show scores!');
         $('#revealScore').prop('disabled', false);
     }
 });
+
+function displayInformation (textInfo) {
+    $('canvas').removeLayer('information').drawLayers();
+
+    $('canvas').drawText({
+        layer: true,
+        name: 'information',
+        fillStyle: '#000',
+        strokeStyle: '#000',
+        strokeWidth: 1,
+        x: 512, y: 384,
+        fontSize: 0,
+        fontFamily: 'Verdana, sans-serif',
+        text: textInfo
+    });
+
+    $('canvas')
+        .animateLayer('information', {
+            fontSize: 80
+        }, 2000);
+}
 
 socket.on('displayScores', function (scores) {
     //alert('Scores released!');
@@ -268,7 +272,7 @@ socket.on('displayScores', function (scores) {
         $('canvas')
             .animateLayer('score' + scores[i].position, {
                 y: 384,
-                fontSize: 24
+                fontSize: 46
             }, 1000, function (layer) {
                 $(this).animateLayer(layer, {
                     x: playerPool[parseInt(layer.name.substr('score'.length))-1].scorePosition.x,
