@@ -26,3 +26,15 @@ In my case we are all in video conference. But it is not easy actually to gather
 However Scrum process expect all engineer to give an individual number decided on their own based on their understanding. At least for the first estimation.
 
 So that application is helping that by avoiding the use of physical cards and by giving an easy and a little distracting way of sending individually their estimation. Nothing more.
+
+## Deploy and start
+Depends on your server permission, deployment and start up can be very simple.
+
+Assuming you have internet access already and that nodejs and npm are available in your path.
+
+If you are root:
+
+1) git clone https://github.com/jboffel/AgilePocker.git agilePoker
+2) cd agilePoker
+3) npm install
+4) PORT=80 node ctrl.js start
