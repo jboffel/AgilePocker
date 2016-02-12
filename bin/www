@@ -34,7 +34,7 @@ var io = require('../io')(server);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port, ipAdress);
+server.listen(port, ipAddress);
 server.on('error', onError);
 server.on('listening', onListening);
 
