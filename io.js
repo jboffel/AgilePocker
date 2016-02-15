@@ -196,6 +196,7 @@ module.exports = function() {
     socket.on('disconnect', function(message) {
       console.log('Disconnection: ' + message);
       console.log(scrumMaster);
+
       if (scrumMaster.socketId != undefined && socket.id == scrumMaster.socketId) {
         console.log('scrumMaster disconnected');
         scrumMaster.socketId = undefined;
