@@ -1,5 +1,4 @@
 # Intellij
-.idea/
+/node_modules
+/.idea
 *.iml
-*.iws
-node_modules/
