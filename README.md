@@ -1,4 +1,4 @@
-# AgilePocker
+# AgilePoker
 Just a proof of concept using nodejs/express and socket.io to create an Scrum Poker system.
 
 You will just need npm and nodejs on a machine to run the application.
@@ -34,7 +34,7 @@ Assuming you have internet access already and that nodejs and npm are available 
 
 If you are root:
 
-1. git clone https://github.com/jboffel/AgilePocker.git agilePoker
+1. git clone https://github.com/jboffel/AgilePoker.git agilePoker
 2. cd agilePoker
 3. npm install
 4. PORT=80 node ctrl.js start
