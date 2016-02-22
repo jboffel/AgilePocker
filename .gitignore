@@ -1,4 +1,5 @@
 # Intellij
 /node_modules
 /.idea
+/coverage
 *.iml

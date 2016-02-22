@@ -25,7 +25,7 @@ var server = http.createServer(app);
  * Configure socket.io
  */
 
-var io = require('../io')(server);
+var io = require('../io').myIos(server);
 
 
 /**
