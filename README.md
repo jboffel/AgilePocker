@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/jboffel/AgilePoker.svg?branch=master)](https://travis-ci.org/jboffel/AgilePoker)
+[![Coverage Status](https://coveralls.io/repos/github/jboffel/AgilePoker/badge.svg?branch=master)](https://coveralls.io/github/jboffel/AgilePoker?branch=master)
+[![Dependency Status](https://gemnasium.com/jboffel/AgilePoker.svg)](https://gemnasium.com/jboffel/AgilePoker)
+
 # AgilePoker
 Just a proof of concept using nodejs/express and socket.io to create an Scrum Poker system.
 
