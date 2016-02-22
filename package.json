@@ -5,9 +5,11 @@
   "scripts": {
     "start": "node ./bin/www",
     "test":
-      "node ./node_modules/istanbul/lib/cli.js test ./node_modules/mocha/bin/_mocha -- -R spec --require C:\\intellijws\\AgilePocker\\specs\\helpers\\chai.js",
+      "node ./node_modules/istanbul/lib/cli.js test ./node_modules/mocha/bin/_mocha -- -R spec --require ./specs/helpers/chai.js",
     "coverage":
-      "node ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec --require C:\\intellijws\\AgilePocker\\specs\\helpers\\chai.js"
+      "node ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec --require ./specs/helpers/chai.js",
+    "coveralls":
+      "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
@@ -26,6 +28,7 @@
     "mocha": "~2.4.5",
     "chai": "~3.5.0",
     "sinon": "~1.17.3",
-    "istanbul": "0.4.2"
+    "istanbul": "0.4.2",
+    "coveralls": "2.11.6"
   }
 }
